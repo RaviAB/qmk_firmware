@@ -25,7 +25,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define TAPPING_TERM 100
 
-
 #define LCPO_KEYS KC_LGUI, KC_LSFT, KC_LBRC
 #define RCPC_KEYS KC_RGUI, KC_RSFT, KC_RBRC
 

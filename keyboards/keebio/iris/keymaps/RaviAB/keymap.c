@@ -1,4 +1,5 @@
 #include QMK_KEYBOARD_H
+#include "local_config.h"
 
 typedef struct {
     bool is_press_action;
@@ -137,12 +138,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case KC_LDAP:
         if (record->event.pressed) {
-            SEND_STRING("Cali" SS_TAP(X_ENT));
+            SEND_STRING(LDAP SS_TAP(X_ENT));
         }
         break;
     case KC_OKTA:
         if (record->event.pressed) {
-            SEND_STRING("Prof" SS_TAP(X_ENT));
+            SEND_STRING(OKTA SS_TAP(X_ENT));
         }
         break;
     case KC_WIND:
@@ -168,7 +169,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
-void encoder_update_user(uint8_t index, bool clockwise) {
+bool encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
         switch(biton32(layer_state)) {
         case _LOWER:
@@ -181,11 +182,12 @@ void encoder_update_user(uint8_t index, bool clockwise) {
     }
     else if (index == 1) {
         switch(biton32(layer_state)) {
-            default:
-                clockwise ? tap_code(KC_DOWN) : tap_code(KC_UP);
-                break;
+        default:
+            clockwise ? tap_code(KC_DOWN) : tap_code(KC_UP);
+            break;
         }
     }
+    return false;
 }
 
 uint8_t cur_dance(qk_tap_dance_state_t *state) {
